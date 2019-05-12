@@ -1,0 +1,240 @@
+#include <iostream>
+#include <cmath>
+#include <conio.h>
+# define M_PI   3.14159265358979323846 /* pi */ 
+using namespace std;
+
+void movimiento_parabolico(void)
+{
+
+    int parabolico_selector = 0;
+    double vimp;
+    double pimpy;
+    double angulomp;
+    double angulorad;
+    double tmp;
+    double g = 9.8;
+    double cosdfri;
+    double radpar;
+    double masafri;
+    double tmp1; 
+    double x = 0;
+	double vx = 0;
+	double y ;
+	double vy = 0;
+	float tiempodivi= 0.25;
+	double ax = 0;
+	double ay = 0;
+	double v = 0;
+	double teta= 0;
+	double vx_vy=0;
+         
+        
+        cout<<"                                   MOVIMIENTO PARABOLICO"<<endl;
+        cout<<endl;
+        cout<<"Ingrese el numero del tema de interes  1.Movimiento parabolico sin friccion  2.Movimiento parabolico con friccion: ";
+       	cin>>parabolico_selector;
+       	cout<<endl;
+       	if(parabolico_selector == 1)
+       	{
+       		cout<<"                          MOVIMIENTO PARABOLICO SIN FRICCION"<<endl;
+       		cout<<endl;
+       		cout<<"Ingrese la velocidad inicial en m/s: ";
+       		cin>>vimp;
+       		cout<<"Ingrese la posicin inicial en Y: ";
+       		cin>>pimpy;
+       		cout<<"Ingrese el angulo de lanzamiento en grados: ";
+       		cin>>angulomp;
+       		cout<<"Ingrese el periodo del tiempo en segundos: ";
+       		cin>>tmp;
+       		cout<<endl;
+       		angulorad = angulomp*(M_PI/180);
+       		
+       	    
+       	    
+       	      
+		
+			   for ( int a=0; a<4; a++)
+			   {
+			   	tmp1 = tmp * tiempodivi;
+			   	
+			
+			   	
+			   x = (vimp*cos(angulorad))*tmp1;
+			   vx = vimp*cos(angulorad);
+			   vy = (vimp*sin(angulorad))-(g*tmp1);
+			   y = (pimpy+(vimp*sin(angulorad)*tmp1))-((0.5)*g*pow(tmp1,2));
+			   
+			  cout<<"En el tiempo "<<tmp<<" la posicion en X es "<<x<<" y su velocidad es "<<vx<<" , la posicion en Y es "<<y<<" y su velocidad es "<<vy<<endl;
+			   cout<<endl;
+			
+			   
+			   tiempodivi = tiempodivi + 0.25;
+			   	
+			   }
+			   
+			    x = (pow(vimp,2)*sin(2*angulorad))/g;
+			   y = (pow(vimp,2)*sin(angulorad)*sin(angulorad))/(2*g);
+			   cout<<"La posicion en X maxima es "<<x<<" , la posicion maxima en Y es "<<y<<endl;
+		
+			
+       	    }
+       	    
+       	    if(parabolico_selector == 2)
+       	    {
+       	    	
+       	       cout<<"                             MOVIMIENTO PARABOLICO CON FRICCION"<<endl;
+       		   cout<<endl;
+       	       cout<<"Ingrese la velocidad inicial en m/s: ";
+       		   cin>>vimp;
+       		   cout<<"Ingrese la posicin inicial en Y: ";
+       		   cin>>pimpy;
+       		   cout<<"Ingrese el angulo de lanzamiento en grados: ";
+       		   cin>>angulomp;
+       		   cout<<"Ingrese el periodo del tiempo en segundos: ";
+       		   cin>>tmp;
+       		   angulorad = angulomp*(M_PI/180);
+       		   cout<<"Ingrese la constante de friccion: ";
+       		   cin>>cosdfri;
+       		   cout<<"Ingrese el radio de la particula: ";
+       		   cin>>radpar;
+       		   cout<<"Ingrese el peso de la masa: ";
+       		   cin>>masafri;
+       		   cout<<endl;
+       		
+       	    
+       	       for ( int a=0; a<4; a++)
+			   {
+			   	tmp1 = tmp * tiempodivi;
+			
+                vx = vimp*cos(angulorad);
+			    vy = (vimp*sin(angulorad))-(g*tmp1);
+			    v = sqrt(pow(vx,2)+pow(vy,2));
+			    vx_vy=vx/vy;			   
+			    teta=atan(vx_vy);			   
+			    ax = ((-cosdfri*pow(v,2)*pow(radpar,2))/masafri)*cos(teta);
+			    ay = (((-cosdfri*pow(v,2)*pow(radpar,2))/masafri)*sin(teta))-g;
+			    y = pimpy+(vimp*tmp1)+(0.5*ay*pow(tmp1,2));
+			    x = (vx*tmp1)+(0.5*ax*pow(tmp1,2));
+			   
+			   cout<<"En el tiempo "<<tmp1<<" la posicion en X es "<<x<<" y su velocidad es "<<vx<<" , la posicion en Y es "<<y<<" y su velocidad es "<<vy<<endl;
+			   cout<<endl;
+			
+			   
+			   tiempodivi = tiempodivi + 0.25;  	
+       	      
+               }
+               
+       	    }
+}
+
+void colisiones(void)
+{
+	int colision_selector;
+    double m1;
+    double m2;
+    double vim1;
+    double vim2;
+    double vf1 = 0;
+    double vf2 = 0;
+    double vf1_1 = 0;
+    double vf2_2 = 0;
+        
+        cout<<"                                          COLISION DE MASAS"<<endl;
+        cout<<endl;
+        cout<<"Ingrese el numero del tema de interes 1.Colision de una masa en reposo 2.Colision de dos masa en movimiento: ";
+        cin>>colision_selector;
+        cout<<endl;
+        if(colision_selector == 1)
+        {
+         cout<<"                                 COLISIONES DE UNA MASA EN REPOSO "<<endl;
+         cout<<endl;
+         cout<<"Ingrese el valor de la velocidad inicial de la masa 1 en m/s: ";
+         cin>>vim1;
+         cout<<"Ingrese el valor del peso de la masa 1: ";
+         cin>>m1;
+         cout<<"Ingerese el valor del peso de la masa 2: ";
+         cin>>m2;
+         cout<<endl;
+       
+         vf1 = ((m1-m2)/(m1+m2))*vim1;
+         vf2 = ((2*m1)/(m1+m2))*vim1;
+       
+         cout<<"La velocidad de la masa 1 es "<<vf1<<" y la velocidad de la masa 2 es "<<vf2<<endl;
+       
+        }
+       else if(colision_selector == 2)
+       {  
+         cout<<"                               COLISIONES DE DOS MASA EN MOVIMIENTO"<<endl;
+         cout<<endl;
+         cout<<"Ingrese el valor de la velocidad inicial de la masa 1 en m/s: ";
+         cin>>vim1;
+         cout<<"Ingrese el valor de la velocidad inicial de la masa 2 en m/s: ";
+         cin>>vim2;
+         cout<<"Ingrese el valor del peso de la masa 1: ";
+         cin>>m1;
+         cout<<"Ingerese el valor del peso de la masa 2: ";
+         cin>>m2;
+         cout<<endl;
+       
+         vf1 = (((m1-m2)/(m1+m2))*vim1) + (((2*m1)/(m1+m2))*vim2);
+         vf2 = (((2*m1)/(m1+m2))*vim1) - (((m1-m2)/(m1+m2))*vim2);
+         cout<<"La velocidad de la masa 1 es "<<vf1<<" y la velocidad de la masa 2 es "<<vf2<<endl;
+        
+       }
+}
+
+void rebote(void)
+{
+	float alre = 0;
+    double mre = 0;
+    double e = 0.8;
+    int a = 0;
+    
+        cout<<"                                               REBOTES"<<endl;
+        cout<<endl;
+	    cout<<"Ingrese la altura inicial: ";
+        cin>>alre;
+        cout<<"Ingrese peso de la masa: ";
+        cin>>mre;
+        cout<<endl;
+       
+        while(alre > 0)
+       {
+         alre = pow(e,2)*alre;
+       
+         a++;
+         if(alre <= 0.01)
+         {
+       	   alre = 0;
+         }
+        cout<<"Altura: "<<alre<<" Rebote: "<<a<<endl;
+       
+       }
+        a = 0;
+}
+int main()
+{
+	 int numero;
+	 
+	 cout<<"Ingrese el numero del tema de interes  1.Movimiento Parabolico  2.Colision Elastica  3.Rebote : ";
+     cin>>numero;
+     cout<<endl;
+     
+     switch (numero)
+     {
+     	case 1:
+     		movimiento_parabolico();
+     	break;
+		 
+		 case 2:
+		    colisiones();
+		 break;	
+		 
+		 case 3:
+		    rebote();
+		 break;		
+     }
+     
+	return 0;
+}
